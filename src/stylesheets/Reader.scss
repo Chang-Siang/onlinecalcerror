@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+  font-family: "Helvetica", sans-serif;
+}
+
+.container {
+  text-align: center;
+  padding: 15px;
+  margin: 10px auto;
+}
+
+.react-csv {
+  input {
+    padding: 10px;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+}
+
+
+.container p {
+  padding-top: 10px;
+  color: #666;
+}

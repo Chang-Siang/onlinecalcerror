@@ -1,0 +1,136 @@
+@mixin responsive($type) {
+
+    // 判斷變數是lg, md, sm, xs，再依照判斷出來的載入對應的media query
+    @if $type==lg {
+        @media only screen and (min-width: 1200px) {
+            @content;
+        }
+    }
+
+    @if $type==md {
+        @media only screen and (min-width: 1025px) and (max-width: 1199px) {
+            @content;
+        }
+    }
+
+    @else if $type==sm {
+        @media only screen and (min-width: 768px) and (max-width: 1024px) {
+            @content;
+        }
+    }
+
+    @else if $type==xs {
+        @media only screen and (max-width: 767px) {
+            @content;
+        }
+    }
+
+    // 僅區分桌面與行動裝置
+    @if $type==lg+md {
+        @media only screen and (min-width: 1025px) {
+            @content;
+        }
+    }
+
+    @if $type==sm+xs {
+        @media only screen and (max-width: 1024px) {
+            @content;
+        }
+    }
+}
+
+.Calculator {
+    margin-top: -10px;
+
+    .row {
+        padding: 15px 0;
+
+        >div {
+            margin: 10px auto;
+        }
+
+        .row-title {
+            @include responsive(lg+md) {
+                text-align: left;
+            }
+
+            @include responsive(sm+xs) {
+                text-align: center;
+            }
+        }
+    }
+
+    .calculator-date-range {
+        .badge {
+            margin-top: 15px;
+            font-size: 16px;
+        }
+    }
+
+    .calculator-csv-reader {
+        .badge {
+            margin-top: 15px;
+            font-size: 16px;
+
+            a {
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .glyphicon {
+                margin-right: 6px;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .calculator-score {
+        .row-title {
+            text-align: center;
+
+            .score-type {
+                text-align: center;
+
+                .badge {
+                    font-size: 14px;
+                }
+            }
+
+
+            .score-value {
+                span {
+                    font-size: 32px;
+
+                }
+            }
+
+            .rmse {
+                padding: 0px;
+                color: #dc3545;
+            }
+
+            .mape {
+                padding: 0px;
+                color: #007bff;
+
+            }
+        }
+
+        form {
+            .form-row {
+                margin: 0 5px;
+                .form-group {
+                    margin: 0 auto;
+
+                    .btn {
+                        border-radius: .25rem;
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
+                    }
+                }
+            }
+        }
+
+
+    }
+}
