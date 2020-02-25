@@ -19,7 +19,7 @@ const Header = () => {
                             <Nav.Link eventKey="0" as={NavLink} to="/" exact={true} activeClassName="active">Calculator</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link eventKey="1" as={NavLink} to="/ranking" activeClassName="active">Ranking</Nav.Link>
+                            <Nav.Link eventKey="1" as={NavLink} to="/ranking" activeClassName="active" disabled>Ranking</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Container>
