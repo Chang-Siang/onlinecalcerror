@@ -10,22 +10,18 @@ const ClacScore = ({ mape, rmse }) => {
     return (
         <div>
             <Row className="align-items-center rmse">
-                <Col xs={4} className="score-type">
-                    <Badge pill variant="danger">RMSE</Badge>
-                </Col>
-                <Col xs={8} className="score-value">
-                    <OverlayTrigger overlay={<Tooltip>{rmse}</Tooltip>}>
-                        <span>{rmse.toFixed(4)}</span>
-                    </OverlayTrigger>
+                <Col xs={12} className="align-items-center score-type ">
+                        <Badge pill variant="danger">RMSE</Badge>
+                        <OverlayTrigger overlay={<Tooltip>{rmse}</Tooltip>} >
+                            <span className="score-value">{rmse.toFixed(4)}</span>
+                        </OverlayTrigger>
                 </Col>
             </Row>
             <Row className="align-items-center mape">
-                <Col xs={4} className="score-type">
+                <Col xs={12} className="score-type">
                     <Badge pill variant="primary">MAPE</Badge>
-                </Col>
-                <Col xs={8} className="score-value">
                     <OverlayTrigger overlay={<Tooltip>{mape}</Tooltip>}>
-                        <span>{mape.toFixed(4)}</span>
+                        <span className="score-value">{mape.toFixed(4)}</span>
                     </OverlayTrigger>
                 </Col>
             </Row>

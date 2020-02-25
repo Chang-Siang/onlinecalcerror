@@ -85,40 +85,54 @@
     }
 
     .calculator-score {
-        .row-title {
+        // .row-title {
+        // text-align: center;
+
+        .score-type {
+            position: relative;
             text-align: center;
+            height: 50px;
 
-            .score-type {
-                text-align: center;
-
-                .badge {
-                    font-size: 14px;
-                }
+            ::before {
+                content: '';
+                height: 100%;
+                display: inline-block;
+                vertical-align: middle;
             }
 
+            >span {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .badge {
+                font-size: 14px;
+            }
 
             .score-value {
-                span {
-                    font-size: 32px;
-
-                }
-            }
-
-            .rmse {
-                padding: 0px;
-                color: #dc3545;
-            }
-
-            .mape {
-                padding: 0px;
-                color: #007bff;
-
+                margin-left: 25px;
+                font-size: 32px;
             }
         }
+
+
+        .rmse {
+            padding: 0px;
+            color: #dc3545;
+        }
+
+        .mape {
+            padding: 0px;
+            color: #007bff;
+
+        }
+
+        // }
 
         form {
             .form-row {
                 margin: 0 5px;
+
                 .form-group {
                     margin: 0 auto;
 

@@ -270,10 +270,11 @@ class Calculator extends Component {
                 <hr />
                 <Row className="align-items-center calculator-score">
                     <Col xs={12} md={4} className="row-title">
-                        <ClacScore rmse={this.state.rmse} mape={this.state.mape} />
+                        {/* <ClacScore rmse={this.state.rmse} mape={this.state.mape} /> */}
                     </Col>
                     <Col xs={12} md={8}>
-                        <CalcSaveResult username={this.state.username} handleChange={this.handleChange} handleISaveResult={this.handleISaveResult} />
+                        <ClacScore rmse={this.state.rmse} mape={this.state.mape} />
+                        {/* <CalcSaveResult username={this.state.username} handleChange={this.handleChange} handleISaveResult={this.handleISaveResult} /> */}
                     </Col>
                 </Row>
             </div>
