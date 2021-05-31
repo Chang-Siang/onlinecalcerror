@@ -51,16 +51,22 @@
 
         .row-title {
             @include responsive(lg+md) {
-                text-align: left;
+                text-align: center;
             }
 
             @include responsive(sm+xs) {
                 text-align: center;
             }
+            h2 {
+                font-weight: bold;
+            }
         }
     }
 
-    .calculator-date-range {
+    .calculator-textarea {
+        textarea {
+            height: 100%;
+        }
         .badge {
             margin-top: 15px;
             font-size: 16px;
