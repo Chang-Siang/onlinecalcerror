@@ -40,11 +40,9 @@
 }
 
 .Calculator {
-    margin-top: -10px;
-
+    margin-top: -45px;
     .row {
         padding: 15px 0;
-
         >div {
             margin: 10px auto;
         }
@@ -65,18 +63,22 @@
 
     .calculator-textarea {
         textarea {
+            margin: 0 auto;
             height: 100%;
+            width: 90%;
+            font-size:large;
         }
         .badge {
-            margin-top: 15px;
+            margin-top: 20px;
             font-size: 16px;
+            font-weight: lighter;
         }
     }
 
     .calculator-csv-reader {
         .badge {
-            margin-top: 15px;
-            font-size: 16px;
+            // margin-top: 15px;
+            // font-size: 16px;
 
             a {
                 color: #fff;
