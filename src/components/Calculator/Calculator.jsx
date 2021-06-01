@@ -189,18 +189,20 @@ class Calculator extends Component {
                         <Row className="align-items-center calculator-textarea">
                             <Col xs={12} className="row-title">
                                 <h2>Real Answer</h2>
+                                <span>Enter some numbers or upload a CSV file with data</span>
                             </Col>
                             <Col xs={12} className="row-textarea">
                                 <textarea value={this.state.real.join('\n')} placeholder='Please enter some numbers, separated by line breaks.' className="form-control" rows={10} onChange={(e) => this.handleTextareaChange('real', e)} />
-                                <br />
+                                {/* <br /> */}
                                 <Badge pill variant="primary">
                                     {this.state.real.length} Data Points
                                 </Badge>
                             </Col>
                             <Col xs={12} className="calculator-csv-reader">
                                 <ForecastReader handleForce={(...e) => this.handleForce('real', ...e)} />
+                                {/* <br /> */}
                                 <Badge pill variant="secondary">
-                                    <a href='https://raw.githubusercontent.com/Chang-Siang/onlinecalcerror/master/public/elec_data/Sample(273Days).csv'>
+                                    <a href='https://raw.githubusercontent.com/Chang-Siang/onlinecalcerror/master/public/Data/Template(Real).csv' target='_blank'>
                                         <span className="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
                                         File format template
                                     </a>
@@ -212,18 +214,20 @@ class Calculator extends Component {
                         <Row className="align-items-center calculator-textarea">
                             <Col xs={12} className="row-title">
                                 <h2>Predictive Value</h2>
+                                <span>Enter some numbers or upload a CSV file with data</span>
                             </Col>
                             <Col xs={12} className="row-textarea">
                                 <textarea value={this.state.pred.join('\n')} placeholder='Please enter some numbers, separated by line breaks.' className="form-control" rows='10' onChange={(e) => this.handleTextareaChange('pred', e)} />
-                                <br />
+                                {/* <br /> */}
                                 <Badge pill variant="primary">
                                     {this.state.pred.length} Data Points
                                 </Badge>
                             </Col>
                             <Col xs={12} className="calculator-csv-reader">
                                 <ForecastReader handleForce={(...e) => this.handleForce('pred', ...e)} />
+                                {/* <br /> */}
                                 <Badge pill variant="secondary">
-                                    <a href='https://raw.githubusercontent.com/Chang-Siang/onlinecalcerror/master/public/elec_data/Sample(273Days).csv'>
+                                    <a href='https://raw.githubusercontent.com/Chang-Siang/onlinecalcerror/master/public/Data/Template(Pred).csv' target='_blank'>
                                         <span className="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
                                         File format template
                                     </a>
@@ -235,7 +239,7 @@ class Calculator extends Component {
                 <hr />
                 <Row className="align-items-center">
                     <Col xs={12} className="row-title">
-                        <Button variant="primary" onClick={this.calculateScore}>
+                        <Button variant="btn btn-outline-primary btn-lg btn-block" onClick={this.calculateScore}>
                             Calculate
                         </Button>
                         {/* <ClacScore rmse={this.state.rmse} mape={this.state.mape} /> */}
