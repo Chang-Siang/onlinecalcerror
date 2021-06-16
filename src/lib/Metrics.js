@@ -54,7 +54,12 @@ const mse = (real, pred) => {
 export const RMSE = (real, pred) => {
     return Math.sqrt(mse(real, pred));
 }
-
+/**
+ * compute the n-RMSE
+ */
+ export const nRMSE = (real, pred) => {
+    return Math.sqrt(mse(real, pred))/mean(real) * 100;
+}
 /**
  * compute the mean absolute percentage error
  */
