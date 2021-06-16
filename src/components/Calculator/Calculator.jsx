@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { readRemoteFile } from 'react-papaparse'
 import moment from 'moment';
-import { MAPE, RMSE } from '../../lib/Metrics'
+import { MAPE, nRMSE } from '../../lib/Metrics'
 // Bs components
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -27,7 +27,6 @@ class Calculator extends Component {
     // ---------------------------------------------------
     constructor() {
         super()
-        // this.handleDayClick = this.handleDayClick.bind(this);
         this.state = {
             isFileUpload: false,
             originData: [],
@@ -36,20 +35,19 @@ class Calculator extends Component {
             to: "",
             mape: 0,
             rmse: 0,
+            real: [],
+            pred: []
         }
     }
 
     componentDidMount() {
-        console.log('componentDidMount()');
         this.loadOriginData();
     }
 
     componentDidUpdate() {
-        console.log('componentDidUpdate()');
     }
 
     componentWillUnmount() {
-        console.log('componentWillUnmount()');
     }
 
     loadOriginData = () => {
@@ -139,7 +137,7 @@ class Calculator extends Component {
     }
 
     calculateScore = (originData, forecastData) => {
-        let rmse = RMSE(originData, forecastData)
+        let rmse = nRMSE(originData, forecastData)
         let mape = MAPE(originData, forecastData)
 
         this.setState({
@@ -152,50 +150,7 @@ class Calculator extends Component {
     // ---------------------------------------------------
     // handle action
     // ---------------------------------------------------
-    handleFromChange = (from) => {
-        // 檢查是否為合法日期
-        const temp = new Date(from)
 
-        if (!isNaN(temp.valueOf())) {
-            from = new Date(from.getFullYear(), from.getMonth(), from.getDate(), 0, 0, 0)
-            if (defFrom > from) {
-                alert('Out of Range.')
-                from = defFrom;
-            }
-        }
-
-        this.setState({
-            from
-        })
-    }
-
-    handleToChange = (to) => {
-        // 檢查是否為合法日期
-        const temp = new Date(to)
-
-        if (!isNaN(temp.valueOf())) {
-            to = new Date(to.getFullYear(), to.getMonth(), to.getDate(), 0, 0, 0)
-            if (defTo < to) {
-                to = defTo;
-                alert('Out of Range.')
-            }
-        }
-
-        this.setState({
-            to
-        }
-        )
-    }
-
-    showFromMonth() {
-        const { from, to } = this.state;
-        if (!from) {
-            return;
-        }
-        if (moment(to).diff(moment(from), 'months') < 2) {
-            this.to.getDayPicker().showMonth(from);
-        }
-    }
 
     handleForce = (data, fileName) => {
         // 檢查附檔名，若不符合則判斷上傳失敗
@@ -211,25 +166,13 @@ class Calculator extends Component {
         this.dataCheck(forecastData)
     }
 
-    handleChange = (event) => {
-        this.setState({ username: event.target.value });
-    }
-
-    handleISaveResult = () => {
-        const saveItem = {
-            id: +new Date(),
-            name: this.state.username,
-            from: this.state.from,
-            to: this.state.to,
-            mape: this.state.mape,
-            rmse: this.state.rmse
-        }
-        if (this.state.isFileUpload) {
-            // 呼叫 Ajax存入資料庫
-            this.ajaxServerItemAdd(saveItem)
-            this.setState({ isFileUpload: false });
+    // real
+    handleTextareaChange = (target, e) => {
+        console.log(String(e.target.value).split('\n').map(Number))
+        if (target == 'pred') {
+            this.setState({ pred: String(e.target.value).split('\n').map(Number) })
         } else {
-            alert("請重新上傳檔案")
+            this.setState({ real: String(e.target.value).split('\n').map(Number) })
         }
     }
 
@@ -238,24 +181,27 @@ class Calculator extends Component {
             <div className="Calculator">
                 <Row className="align-items-center calculator-date-range">
                     <Col xs={12} md={4} className="row-title">
-                        <h2>Select a Date Range</h2>
+                        <h2>正確答案</h2>
                     </Col>
                     <Col xs={12} md={8}>
-                        <DatePick
-                            from={this.state.from}
-                            to={this.state.to}
-                            handleFromChange={this.handleFromChange}
-                            handleToChange={this.handleToChange}
-                        />
+                        <textarea value={this.state.value} onChange={(e) =>this.handleTextareaChange('real', e)} />
+                        <br />
                         <Badge pill variant="primary">
-                            {(this.state.to - this.state.from) / (1000 * 3600 * 24) + 1} Days
+                            {this.state.real.length} Data Points
                         </Badge>
                     </Col>
                 </Row>
                 <hr />
                 <Row className="align-items-center calculator-csv-reader">
                     <Col xs={12} md={4} className="row-title">
-                        <h2>Select CSV File</h2>
+                        <h2>預測數值</h2>
+                    </Col>
+                    <Col xs={12} md={8}>
+                        <textarea value={this.state.value} onChange={(e) =>this.handleTextareaChange('pred', e)} />
+                        <br />
+                        <Badge pill variant="success">
+                            {this.state.pred.length} Data Points
+                        </Badge>
                     </Col>
                     <Col xs={12} md={8}>
                         <ForecastReader handleForce={this.handleForce} />
@@ -274,7 +220,6 @@ class Calculator extends Component {
                     </Col>
                     <Col xs={12} md={8}>
                         <ClacScore rmse={this.state.rmse} mape={this.state.mape} />
-                        {/* <CalcSaveResult username={this.state.username} handleChange={this.handleChange} handleISaveResult={this.handleISaveResult} /> */}
                     </Col>
                 </Row>
             </div>
